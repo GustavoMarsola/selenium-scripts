@@ -52,9 +52,17 @@ class BotInstagram():
                 print(url)
                 pics.append(url)
         return pics
+    
+    def curtida(self,url):
+        self.driver.get(url)
+        sleep(3)
+        like = self.driver.find_element(by=By.NAME, value='Curtir')
+        like.click()
 
 
 if __name__ == '__main__':
     robo = BotInstagram()
     insta = robo.login_instagram(os.getenv('LOGIN'),os.getenv('PASSWORD'))
-    karina = robo.carregar_pagina('kasantiago.m')
+    fotos = robo.carregar_pagina('gustavomarsola')
+    for pictures in fotos:
+        dar_like = robo.curtida(pictures)
