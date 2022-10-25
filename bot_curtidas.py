@@ -47,10 +47,9 @@ class InstaBot():
     
     def curtida(self,url):
         self.driver.get(url)
-        sleep(3)
-        like = self.driver.find_element(by=By.NAME, value='Curtir')
-        like.click()
-
+        sleep(5)
+        like = self.driver.find_elements(by=By.CLASS_NAME, value='_abl-')
+        like[1].click()
 
 if __name__ == '__main__':
     robo = InstaBot()
