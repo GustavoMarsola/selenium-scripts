@@ -11,23 +11,15 @@ from time import sleep
 import dotenv
 import os
 
-class BotInstagram():
+class InstaBot():
 
     def __init__(self):
         print("Carregando variáveis de ambiente do programa")
         dotenv.load_dotenv(".env")
         print("Iniciando o navegador Google Chrome")
         options = webdriver.ChromeOptions()
-        options.add_argument('--no-sandbox')
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument("test-type")
-        options.add_argument("disable-popup-blocking")
-        options.add_argument('--disable-gpu')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--disable-extensions')
-        options.add_experimental_option("detach", True)
-        options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        options.add_argument('--start-maximized --disable-notifications --silent')
+        options.add_argument('--start-maximized --disable-notifications')
+        options.add_argument('--incognito')
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     def login_instagram(self,user,senha):
@@ -61,8 +53,8 @@ class BotInstagram():
 
 
 if __name__ == '__main__':
-    robo = BotInstagram()
+    robo = InstaBot()
     insta = robo.login_instagram(os.getenv('LOGIN'),os.getenv('PASSWORD'))
-    fotos = robo.carregar_pagina('gustavomarsola')
+    fotos = robo.carregar_pagina('mazzclub')
     for pictures in fotos:
         dar_like = robo.curtida(pictures)
